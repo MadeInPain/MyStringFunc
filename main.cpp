@@ -54,19 +54,16 @@ void MyStrcpy(char * arg0, const char * arg1){
 }
 
 /*
- * compare two char_array by value of character, arg0 > arg1 => 1, < => -1, == => 0
+ * compare two char_array
  */
 int MyStrcmp(const char * arg0, const char *arg1){
-    int c1 = 0, c2 = 0;
-    for(;*arg0 != '\0';++arg0){
-        c1 += *arg0;
+    while((*arg0 != '\0') && (*arg0 != '\0') && (*arg0) == (*arg1)){
+       ++arg0, ++arg1;
+    //do nothing
     }
-    for(;*arg1 != '\0';++arg1){
-        c2 += *arg1;
-    }
-    if(c1 > c2)
+    if(*arg0 > *arg1)
         return 1;
-    else if(c1 < c2)
+    else if(*arg0 < *arg1)
         return -1;
     return 0;
 }
