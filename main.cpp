@@ -22,6 +22,7 @@ int main()
 
     cout << str << endl;
 
+    cout << "enter cstrings to compare: \n";
     while(cin){
         char s1[20], s2[20];
         cin >> s1, cin >> s2;
@@ -48,8 +49,8 @@ int MyStrlen(const char * arg0){
  */
 void MyStrcpy(char * arg0, const char * arg1){
 
-    for(;(*arg0 != '\0') && (*arg1 != '\0'); ++arg0, ++arg1){
-        *arg0 = *arg1;
+    while(*arg0 && *arg1){
+        *(arg0++) = *(arg1++);
     }
 }
 
@@ -57,7 +58,7 @@ void MyStrcpy(char * arg0, const char * arg1){
  * compare two char_array
  */
 int MyStrcmp(const char * arg0, const char *arg1){
-    while((*arg0 != '\0') && (*arg0 != '\0') && (*arg0) == (*arg1)){
+    while(*arg0 && (*arg0) == (*arg1)){ //if *arg0 != 0 and &arg0 == *arg1 (*arg1 != 0 too)
        ++arg0, ++arg1;
     //do nothing
     }
