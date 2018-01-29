@@ -1,6 +1,6 @@
 /*
- * write func:
- * strlen(), strcpy(), strcmp()
+ * simple cstring func, learninп purpose, noob level
+ *
 */
 
 #include <iostream>
@@ -14,10 +14,13 @@ int MyStrcmp(const char *, const char *);
 void MyCut(const char* , char*, const unsigned int index = 0, const unsigned int count = 1);
 char * MyDCut(const char*, const unsigned int index = 0, const unsigned int count = 1);
 
+void MyCat(const char *, const char *, char *);
+char * MyDCat(const char *, const char *);
+
 
 int main(){
 
-    char s1[20], s2[20];
+    char s1[20], s2[20], s3[40];
     int startIndex = 0, size = 0;
 
 
@@ -29,13 +32,19 @@ int main(){
 
     cout << str << endl;
 
-    // MyCat demo
+    //MyCat demo
+    cout << "cat(): ";
+    cin >> s1, cin >> s2;
+    MyCat(s1, s2, s3);
+    cout << s3 << endl;
+
+    // MyCut demo
     cout << "cut(): ";
     cin >> s1, cin >> startIndex, cin >> size;
     MyCut(s1, s2, startIndex, size);
     cout << s2 << endl;
 
-    //MyDCat demo
+    //MyDCut demo
     cout << "dynamic cut: ";
     cin >> s1, cin >> startIndex, cin >>size;
     char * ptr; //for string in heap
@@ -120,6 +129,15 @@ char * MyDCut(const char * arg0, const unsigned int index, const unsigned int co
     }
 
     return result;
+}
+
+/*
+ * concatination
+ */
+void MyCat(const char * arg0, const char * arg1, char * arg2){
+    while(*arg2++ = *arg0++){}
+    --arg2;
+    while(*arg2++ = *arg1++){}
 }
 
 
