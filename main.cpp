@@ -35,7 +35,7 @@ int main(){
 
     cout << str << endl;
 
-    cout << "enter an operation" << endl;
+    cout << "Enter number: " << endl;
     //legend
     cout << "0 - Cat\n1 - Cut\n2 - DCut\n3 - Strcmp\n4 - Atoi" << endl;
 
@@ -90,7 +90,7 @@ int main(){
             cout << "wrong number!" << endl;
             break;
         }
-        cout << "enter an operation" << endl;
+        cout << "Enter number: " << endl;
     }
 
 
@@ -186,16 +186,71 @@ void MyCat(const char * arg0, const char * arg1, char * arg2){
  * atoi (cstring to integer)
  */
 int MyAtoi(const char *c){
+
+    int base = 10;
     int res = 0;
-    for(;isdigit(*c); ++c){
-        if(res){
-            res = res * 10 + *c - 48; // 10 because decimal numeral system, '1' = 49
-        }
-        else{ //firs step, count = 0
-            res = *c - 48;
-        }
+
+    if(*c == '0'){ // modification for hex and oct input
+        if(*(c+1) == 'x')
+                base = 16;
+        else
+            base = 8;
+
     }
-    return res;
+
+    switch (base){
+    case 10:
+        for(;isdigit(*c); ++c){
+            if(res){
+                res = res * base + *c - 48; // -48 because, '1' = 49 ACII
+            }
+            else{ //firs step, count = 0
+                res = *c - 48;
+            }
+        }
+        return res;
+    case 16:
+        c+=2; // skip '0x'
+
+        for(;isxdigit(*c); ++c){
+            if(res){
+                if(isdigit(*c))
+                    res = res * base + *c - 48; // -48 because, '1' = 49 ACII
+                else
+                    if(isupper(*c))
+                        res = res * base + *c - 55;
+                    else
+                        res = res * base + *c - 87;
+            }
+            else{ //firs step, count = 0
+                if(isdigit(*c))
+                    res = *c - 48;
+                else{
+                    if(isupper(*c))
+                        res = *c - 55;
+                    else
+                        res = *c - 87;
+                }
+
+            }
+        }
+        return res;
+    case 8:
+        c+=1; // skip '0'
+        for(;(isdigit(*c)) && (*c <= 48 + 8); ++c){
+            if(res){
+                res = res * base + *c - 48; // -48 because, '1' = 49 ACII
+            }
+            else{ //firs step, count = 0
+                res = *c - 48;
+            }
+        }
+        return res;
+
+    }
+    return -1;
+
+
 }
 
 
